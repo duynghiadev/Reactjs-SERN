@@ -45,7 +45,7 @@ class ModalUser extends Component {
     });
   };
 
-  checkValideInput = () => {
+  checkValidateInput = () => {
     let isValid = true;
     let arrInput = ["email", "password", "firstName", "lastName", "address"];
     for (let i = 0; i < arrInput.length; i++) {
@@ -59,7 +59,7 @@ class ModalUser extends Component {
   };
 
   handleAddNewUser = () => {
-    let isValid = this.checkValideInput();
+    let isValid = this.checkValidateInput();
     if (isValid === true) {
       // call api create modal
       this.props.createNewUser(this.state);
