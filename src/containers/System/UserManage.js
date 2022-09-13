@@ -3,43 +3,63 @@ import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import "./UserManage.scss";
 import { getAllUsers } from "../../services/userService";
+import ModalUser from "./ModalUser";
 class UserManage extends Component {
-  state = {};
   constructor(props) {
     super(props);
     this.state = {
       arrUsers: [],
+      isOpenModalUser: false,
     };
   }
 
   async componentDidMount() {
     let response = await getAllUsers("ALL");
     if (response && response.errCode === 0) {
-      this.setState(
-        {
-          arrUsers: response.users,
-        },
-        () => {
-          console.log("check state user: ", this.state.arrUsers);
-        }
-      );
+      this.setState({
+        arrUsers: response.users,
+      });
     }
-    console.log("check state user 1: ", this.state.arrUsers);
   }
+
+  handleAddNewUser = () => {
+    this.setState({
+      isOpenModalUser: true,
+    });
+  };
+
+  toggleUserModal = () => {
+    this.setState({
+      isOpenModalUser: !this.state.isOpenModalUser,
+    });
+  };
 
   /** Life cycle
    * Run component:
    * 1. Run constructor -> init state
    * 2. Did mount
-   * 3. Render
+   * 3. Render (re-render)
    */
 
   render() {
-    console.log("check render: ", this.state);
     let arrUsers = this.state.arrUsers;
+    console.log(arrUsers);
     return (
       <div className="users-container">
+        <ModalUser
+          isOpen={this.state.isOpenModalUser}
+          toggleFromParent={this.toggleUserModal}
+          test={"abc"}
+        />
         <div className="title text-center">Manage users with DuyNghia</div>
+        <div className="mx-1">
+          <button
+            className="btn btn-primary px-3"
+            onClick={() => this.handleAddNewUser()}
+          >
+            <i className="fas fa-plus"></i> Add new users
+          </button>
+        </div>
         <div className="users-table mt-3 mx-1">
           <table id="customers">
             <tr>
@@ -54,7 +74,6 @@ class UserManage extends Component {
             </tr>
             {arrUsers &&
               arrUsers.map((item, index) => {
-                console.log("eric check map: ", item, index);
                 return (
                   <tr>
                     <td>{item.email}</td>
