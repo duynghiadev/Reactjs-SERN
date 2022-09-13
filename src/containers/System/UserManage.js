@@ -6,8 +6,10 @@ import {
   getAllUsers,
   createNewUserService,
   deleteUserService,
+  editUserService,
 } from "../../services/userService";
 import ModalUser from "./ModalUser";
+import ModalEditUser from "./ModalEditUser";
 import { emitter } from "../../utils/emitter";
 class UserManage extends Component {
   constructor(props) {
@@ -15,6 +17,8 @@ class UserManage extends Component {
     this.state = {
       arrUsers: [],
       isOpenModalUser: false,
+      isOpenModalEditUser: false,
+      userEdit: {},
     };
   }
 
@@ -40,6 +44,12 @@ class UserManage extends Component {
   toggleUserModal = () => {
     this.setState({
       isOpenModalUser: !this.state.isOpenModalUser,
+    });
+  };
+
+  toggleUserEditModal = () => {
+    this.setState({
+      isOpenModalEditUser: !this.state.isOpenModalEditUser,
     });
   };
 
@@ -74,6 +84,30 @@ class UserManage extends Component {
     }
   };
 
+  handleEditUser = (user) => {
+    console.log("check edit user: ", user);
+    this.setState({
+      isOpenModalEditUser: true,
+      userEdit: user,
+    });
+  };
+
+  doEditUser = async (user) => {
+    try {
+      let res = await editUserService(user);
+      if (res && res.errCode === 0) {
+        this.setState({
+          isOpenModalEditUser: false,
+        });
+        await this.getAllUsersFromReact();
+      } else {
+        alert("res.errCode");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   /** Life cycle
    * Run component:
    * 1. Run constructor -> init state
@@ -91,6 +125,14 @@ class UserManage extends Component {
           toggleFromParent={this.toggleUserModal}
           createNewUser={this.createNewUser}
         />
+        {this.state.isOpenModalEditUser && (
+          <ModalEditUser
+            isOpen={this.state.isOpenModalEditUser}
+            toggleFromParent={this.toggleUserEditModal}
+            currentUser={this.state.userEdit}
+            editUser={this.doEditUser}
+          />
+        )}
         <div className="title text-center">Manage users with DuyNghia</div>
         <div className="mx-1">
           <button
@@ -126,7 +168,10 @@ class UserManage extends Component {
                       <td>{item.gender}</td>
                       <td>{item.roleId}</td>
                       <td>
-                        <button className="btn-edit">
+                        <button
+                          className="btn-edit"
+                          onClick={() => this.handleEditUser(item)}
+                        >
                           <i className="fas fa-pencil-alt"></i>
                         </button>
                         <button
