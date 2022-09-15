@@ -1,7 +1,7 @@
 .home-header-container {
   height: 60px;
   width: 100%;
-  padding: 0 20px;
+  padding: 0 40px;
 
   .home-header-content {
     width: 100%;
@@ -9,16 +9,16 @@
     display: flex;
 
     .left-content {
-      width: 25%;
+      width: 20%;
       display: flex;
       align-items: center;
-      border: 1px solid green;
 
       .header-logo {
-        background: url("../../assets/logo.svg") center center no-repeat;
         height: 100%;
         width: 100%;
         cursor: pointer;
+        transform: scale(0.5, 0.5);
+        margin-left: -45px;
       }
 
       i {
@@ -29,8 +29,7 @@
     }
 
     .center-content {
-      width: 50%;
-      border: 1px solid orange;
+      width: 55%;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -45,16 +44,44 @@
 
     .right-content {
       width: 25%;
-      border: 1px solid grey;
       display: flex;
       justify-content: center;
       align-items: center;
+
+      .support {
+        padding-right: 50px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        i {
+          font-size: 15px;
+          margin-right: 5px;
+        }
+      }
+
+      .language-vi {
+        cursor: pointer;
+
+        &.active {
+          color: orange;
+        }
+      }
+
+      .language-en {
+        margin: 0 10px;
+        cursor: pointer;
+
+        &.active {
+          color: blue;
+        }
+      }
     }
   }
 }
 
 .home-header-banner {
-  background: url("../../assets/header-background.jpg");
+  background-image: url("../../assets/header-background.jpg");
   height: 485px;
   background-repeat: no-repeat;
   background-size: cover;
@@ -63,8 +90,11 @@
   flex-direction: column;
 
   .content-up {
-    border: 1px solid red;
-    height: 50%;
+    background-image: linear-gradient(
+      rgba(0, 0, 0, 0.25),
+      rgba(255, 255, 255, 0.1)
+    );
+    height: 65%;
     padding-top: 15px;
 
     .title1 {
@@ -109,8 +139,15 @@
   }
 
   .content-down {
-    border: 1px solid green;
-    height: 50%;
+    height: 35%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background-image: linear-gradient(
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 1)
+    );
 
     .options {
       text-align: center;
@@ -119,7 +156,6 @@
       justify-content: center;
 
       .option-child {
-        border: 1px solid red;
         width: 100px;
 
         .icon-child {
