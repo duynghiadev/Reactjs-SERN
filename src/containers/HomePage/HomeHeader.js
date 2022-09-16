@@ -156,7 +156,7 @@ class HomeHeader extends Component {
                   <i className="fas fa-user-md"></i>
                 </div>
                 <div className="text-child">
-                  S<FormattedMessage id="banner.child5" />
+                  <FormattedMessage id="banner.child5" />
                 </div>
               </div>
               <div className="option-child">

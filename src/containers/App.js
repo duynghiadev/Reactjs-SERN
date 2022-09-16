@@ -50,7 +50,7 @@ class App extends Component {
             {this.props.isLoggedIn && <Header />}
 
             <div className="content-container">
-              <CustomScrollbars style={{ width: "100%", height: "100vh" }}>
+              <CustomScrollbars style={{ height: "100vh", width: "100%" }}>
                 <Switch>
                   <Route path={path.HOME} exact component={Home} />
                   <Route
