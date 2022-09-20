@@ -12,10 +12,6 @@ import "slick-carousel/slick/slick-theme.css";
 import HomeFooter from "./HomeFooter";
 
 class HomePage extends Component {
-  // handleAfterChange = (index, dontAnimate) => {
-  //   console.log("hoidanit check: ", index);
-  // };
-
   render() {
     let settings = {
       dots: false,
@@ -23,7 +19,6 @@ class HomePage extends Component {
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 1,
-      // slickGoTo: this.handleAfterChange,
     };
     return (
       <div>
