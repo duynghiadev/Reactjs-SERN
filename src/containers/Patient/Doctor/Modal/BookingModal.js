@@ -104,29 +104,29 @@ class BookingModal extends Component {
           ? moment.unix(+dataTime.date / 1000).format("dddd - DD/MM/YYYY")
           : moment.unix(+dataTime.date / 1000).format("ddd - MM/DD/YYYY");
 
-      return `${time} - ${date}`
+      return `${time} - ${date}`;
     }
-    return '';
+    return "";
   };
 
   buildDoctorName = (dataTime) => {
     let { language } = this.props;
     if (dataTime && !_.isEmpty(dataTime)) {
-      let name = language === LANGUAGES.VI ?
-        `${dataTime.doctorData.lastName} ${dataTime.doctorData.firstName}`
-        :
-        `${dataTime.doctorData.firstName} ${dataTime.doctorData.lastName}`
-      return name
+      let name =
+        language === LANGUAGES.VI
+          ? `${dataTime.doctorData.lastName} ${dataTime.doctorData.firstName}`
+          : `${dataTime.doctorData.firstName} ${dataTime.doctorData.lastName}`;
+      return name;
     }
-    return '';
-  }
+    return "";
+  };
 
   handleConfirmBooking = async () => {
     // validate input
     // !data.email || !data.doctorId || !data.timeType || !data.date
     let date = new Date(this.state.birthday).getTime();
     let timeString = this.buildTimeBooking(this.props.dataTime);
-    let doctorName = this.buildDoctorName(this.props.dataTime)
+    let doctorName = this.buildDoctorName(this.props.dataTime);
 
     let res = await postPatientBookAppointment({
       fullName: this.state.fullName,
@@ -165,7 +165,7 @@ class BookingModal extends Component {
         className={"booking-modal-container"}
         size="lg"
         centered
-      // backdrop={true}
+        // backdrop={true}
       >
         <div className="booking-modal-content">
           <div className="booking-modal-header">
@@ -182,6 +182,8 @@ class BookingModal extends Component {
                 doctorId={doctorId}
                 isShowDescriptionDoctor={false}
                 dataTime={dataTime}
+                idShowLinkDetail={false}
+                isShowPrice={true}
               />
             </div>
             <div className="row">
