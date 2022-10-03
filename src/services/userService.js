@@ -80,10 +80,18 @@ const getAllSpecialty = () => {
   return axios.get(`/api/get-specialty`);
 };
 
+const getAllClinic = () => {
+  return axios.get(`/api/get-clinic`);
+};
+
 const getAllDetailSpecialtyById = (data) => {
   return axios.get(
     `/api/get-detail-specialty-by-id?id=${data.id}&location=${data.location}`
   );
+};
+
+const getAllDetailClinicById = (data) => {
+  return axios.get(`/api/get-detail-clinic-by-id?id=${data.id}`);
 };
 
 const createNewClinic = (data) => {
@@ -111,4 +119,6 @@ export {
   getAllSpecialty,
   getAllDetailSpecialtyById,
   createNewClinic,
+  getAllClinic,
+  getAllDetailClinicById,
 };
